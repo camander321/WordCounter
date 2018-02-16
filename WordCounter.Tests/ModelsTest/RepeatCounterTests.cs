@@ -45,5 +45,16 @@ namespace WordCounter.Models.Tests
       Assert.AreEqual("long-string", RepeatCounter.SplitWords("this isn't, a long-string!!!")[3]);
       Assert.AreEqual(4, RepeatCounter.SplitWords("this isn't, a long-string!!!").Count);
     }
+    
+    [TestMethod]
+    public void CountWords_AddWordListToDictionary()
+    {
+      RepeatCounter counter;
+      counter = new RepeatCounter("This, is a string...it is a Long, long string.");
+      
+      Assert.AreEqual(2, counter.GetWordCounts()["long"]);
+      Assert.AreEqual(2, counter.GetWordCounts()["string"]);
+      Assert.AreEqual(1, counter.GetWordCounts()["this"]);
+    }
   }
 }
