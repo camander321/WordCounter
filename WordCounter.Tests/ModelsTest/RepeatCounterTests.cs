@@ -7,10 +7,10 @@ namespace WordCounter.Models.Tests
   public class RepeatCounterTest
   {
     [TestMethod]
-    public void Test_JustATest_True()
+    public void Constructor_StoreTextInput()
     {
-      Assert.AreEqual(true, Words.Test(true));
-      Assert.AreEqual(false, Words.Test(false));
+      RepeatCounter counter = new RepeatCounter("some text");
+      Assert.AreEqual("some text", counter.GetText());
     }
   }
 }
