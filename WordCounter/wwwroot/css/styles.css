@@ -1,7 +1,13 @@
 body {
   background-color: lightblue;
+  text-align: center;
 }
 
-#search {
-  display: none;
+.content {
+  margin-top: 25px;
+}
+
+.well {
+  background-color: black;
+  color: lightblue;
 }

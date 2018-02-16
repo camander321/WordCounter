@@ -21,9 +21,10 @@ namespace WordCounter.Controllers
     {
       RepeatCounter counter = new RepeatCounter(Request.Form["text"]);
       Dictionary<string, object> model = new Dictionary<string, object>();
+      string search = Request.Form["search"];
+      model.Add("search", search);
       model.Add("showAll", Request.Form["option"] == "all");
       model.Add("wordCounter", counter);
-      
       model.Add("hasResult", counter.GetIsValid());
       return View("Index", model);
     }

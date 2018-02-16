@@ -3,40 +3,50 @@
 }
 
 <form action="/" method="post">
-  <input type="text" class="form-control" name="text" placeholder="Enter Some Text To Search Through">
-  <div class="row">
+  <div class="form-group">
+    <input type="text" class="form-control" name="text" placeholder="Enter Some Text To Search Through">
+  </div>
+  <div class="row form-group">
     <div class="col-xs-6">
       <select id="option" name="option" class="form-control">
-        <option value="all">Show counts for all words</option>
         <option value="one">Show counts for one word</option>
+        <option value="all">Show counts for all words</option>
       </select>  
     </div>
     <div class="col-xs-6">
       <input id="search" class="form-control" type="text" name="search" placeholder="Enter A Word to Find">
     </div>
   </div>
-  <button type="submit" class="btn btn-info">GO!</button>
+  <button type="submit" class="btn btn-success">GO!</button>
 </form>
 
-@{
-  if(Model["hasResult"])
-  {
-    var counts = Model["wordCounter"].GetWordCounts();
-    if(Model["showAll"])
+<div class="row">
+  @{
+    if(Model["hasResult"])
     {
-      <h2>Showing All Words</h2>
-      
-      foreach(var word in Model["wordCounter"].GetSortedWords())
+      var counts = Model["wordCounter"].GetWordCounts();
+      if(Model["showAll"])
       {
-        <div class="col-xs-3">
-          <h3>@word: @counts[word]</h3>
-        </div>
+        <h2>Showing All Words</h2>
+        
+        foreach(var word in Model["wordCounter"].GetSortedWords())
+        {
+          <div class="col-xs-3">
+            <h3>@word: @counts[word]</h3>
+          </div>
+        }
       }
-      
-    }
-    else
-    {
-      <p>Show a single wrod</p>
+      else
+      {
+        @if(Model["search"].ToString().Length > 0)
+        {
+          <h2>The word '@Model["search"].ToString()'  was found @counts[Model["search"].ToString()].ToString() time(s).</h2>
+        }
+        else
+        {
+          <h2>Please enter a word to find</h2>
+        }
+      }
     }
   }
-}
+</div>
