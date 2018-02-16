@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WordCounter.Models;
+using System;
+using System.Collections.Generic;
 
 namespace WordCounter.Controllers
 {
@@ -9,7 +11,21 @@ namespace WordCounter.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
-      return View("Index");
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("hasResult", false);
+      return View("Index", model);
+    }
+    
+    [HttpPost("/")]
+    public ActionResult Show()
+    {
+      RepeatCounter counter = new RepeatCounter(Request.Form["text"]);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("showAll", Request.Form["option"] == "all");
+      model.Add("wordCounter", counter);
+      
+      model.Add("hasResult", counter.GetIsValid());
+      return View("Index", model);
     }
   }
 }

@@ -2,4 +2,41 @@
   Layout = "_Layout";
 }
 
-<h2>Index Stuff Goes Here</h2>
+<form action="/" method="post">
+  <input type="text" class="form-control" name="text" placeholder="Enter Some Text To Search Through">
+  <div class="row">
+    <div class="col-xs-6">
+      <select id="option" name="option" class="form-control">
+        <option value="all">Show counts for all words</option>
+        <option value="one">Show counts for one word</option>
+      </select>  
+    </div>
+    <div class="col-xs-6">
+      <input id="search" class="form-control" type="text" name="search" placeholder="Enter A Word to Find">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-info">GO!</button>
+</form>
+
+@{
+  if(Model["hasResult"])
+  {
+    var counts = Model["wordCounter"].GetWordCounts();
+    if(Model["showAll"])
+    {
+      <h2>Showing All Words</h2>
+      
+      foreach(var word in Model["wordCounter"].GetSortedWords())
+      {
+        <div class="col-xs-3">
+          <h3>@word: @counts[word]</h3>
+        </div>
+      }
+      
+    }
+    else
+    {
+      <p>Show a single wrod</p>
+    }
+  }
+}
