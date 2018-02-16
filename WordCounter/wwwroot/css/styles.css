@@ -1,6 +1,11 @@
 body {
   background-color: lightblue;
   text-align: center;
+  background-image: url("../img/numbers.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Dosis', sans-serif;
 }
 
 .content {
@@ -8,6 +13,7 @@ body {
 }
 
 .well {
-  background-color: black;
+  background-color: #111111dd;
   color: lightblue;
+  border-width: 0px;
 }

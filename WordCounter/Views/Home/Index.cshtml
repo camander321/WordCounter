@@ -1,10 +1,16 @@
 @{
   Layout = "_Layout";
+  
+  string value = "";
+  if(Model["hasResult"])
+  {
+    value = Model["wordCounter"].GetText().ToString();
+  }
 }
 
 <form action="/" method="post">
   <div class="form-group">
-    <input type="text" class="form-control" name="text" placeholder="Enter Some Text To Search Through">
+    <input type="text" class="form-control" name="text" value="@value" placeholder="Enter Some Text To Search Through">
   </div>
   <div class="row form-group">
     <div class="col-xs-6">
@@ -40,7 +46,7 @@
       {
         @if(Model["search"].ToString().Length > 0)
         {
-          <h2>The word '@Model["search"].ToString()'  was found @counts[Model["search"].ToString()].ToString() time(s).</h2>
+          <h2>The word '@Model["search"].ToString()'  was found @Model["wordCounter"].GetCountForWord(Model["search"].ToString()).ToString() time(s).</h2>
         }
         else
         {
