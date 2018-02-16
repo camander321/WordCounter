@@ -28,29 +28,20 @@ namespace WordCounter.Models.Tests
     [TestMethod]
     public void IsValidChar_CheckIfCharPartOfWord()
     {
-      Assert.AreEqual(true, RepeatCounter.IsValidChar('a', true));
-      Assert.AreEqual(false, RepeatCounter.IsValidChar('.', true));
-      Assert.AreEqual(false, RepeatCounter.IsValidChar('-', true));
-      Assert.AreEqual(true, RepeatCounter.IsValidChar('a', false));
-      Assert.AreEqual(false, RepeatCounter.IsValidChar('.', false));
-      Assert.AreEqual(true, RepeatCounter.IsValidChar('-', false));
+      RepeatCounter counter = new RepeatCounter("");
+      
+      Assert.AreEqual(true, counter.IsValidChar('a', true));
+      Assert.AreEqual(false, counter.IsValidChar('.', true));
+      Assert.AreEqual(false, counter.IsValidChar('-', true));
+      Assert.AreEqual(true, counter.IsValidChar('a', false));
+      Assert.AreEqual(false, counter.IsValidChar('.', false));
+      Assert.AreEqual(true, counter.IsValidChar('-', false));
     }
     
     [TestMethod]
-    public void SplitWords_GetListOfWordsInString()
+    public void SplitWords_AddWordListToDictionary()
     {
-      Assert.AreEqual("this", RepeatCounter.SplitWords("this isn't, a long-string!!!")[0]);
-      Assert.AreEqual("isn't", RepeatCounter.SplitWords("this isn't, a long-string!!!")[1]);
-      Assert.AreEqual("a", RepeatCounter.SplitWords("this isn't, a long-string!!!")[2]);
-      Assert.AreEqual("long-string", RepeatCounter.SplitWords("this isn't, a long-string!!!")[3]);
-      Assert.AreEqual(4, RepeatCounter.SplitWords("this isn't, a long-string!!!").Count);
-    }
-    
-    [TestMethod]
-    public void CountWords_AddWordListToDictionary()
-    {
-      RepeatCounter counter;
-      counter = new RepeatCounter("This, is a string...it is a Long, long string.");
+      RepeatCounter counter = new RepeatCounter("This, is a string...it is a Long, long string.");
       
       Assert.AreEqual(2, counter.GetWordCounts()["long"]);
       Assert.AreEqual(2, counter.GetWordCounts()["string"]);
@@ -60,8 +51,7 @@ namespace WordCounter.Models.Tests
     [TestMethod]
     public void SortWords_ReturnAListSortedByCount()
     {
-      RepeatCounter counter;
-      counter = new RepeatCounter("This, is a string...it is a Long, long string.");
+      RepeatCounter counter = new RepeatCounter("This, is a string...it is a Long, long string.");
       
       Assert.AreEqual("is", counter.GetSortedWords()[0]);
       Assert.AreEqual("a", counter.GetSortedWords()[1]);
@@ -70,10 +60,9 @@ namespace WordCounter.Models.Tests
     }
     
     [TestMethod]
-    public void GetCountForWord_ReturnAListSortedByCount()
+    public void GetCountForWord_GetCountForSpecificWord()
     {
-      RepeatCounter counter;
-      counter = new RepeatCounter("This, is a string...it is a Long, long string.");
+      RepeatCounter counter = new RepeatCounter("This, is a string...it is a Long, long string.");
       
       Assert.AreEqual(2, counter.GetCountForWord("string"));
       Assert.AreEqual(1, counter.GetCountForWord("this"));

@@ -14,7 +14,7 @@ namespace WordCounter.Models
     {
       _text = text.ToLower();
       _isValid = _text.Length > 0;
-      CountWords();
+      SplitWords();
       SortWords();
     }
     
@@ -38,20 +38,9 @@ namespace WordCounter.Models
       return _sortedWords;
     }
     
-    public void CountWords()
-    {
-      List<string> words = SplitWords(_text);
-      foreach(string word in words)
-      {
-        if(_wordCounts.ContainsKey(word))
-          _wordCounts[word]++;
-        else
-          _wordCounts.Add(word, 1);
-      }
-    }
-    
     public int GetCountForWord(string word)
     {
+      word = word.ToLower();
       if (!_wordCounts.ContainsKey(word))
         return 0;
       return _wordCounts[word];
@@ -69,7 +58,7 @@ namespace WordCounter.Models
       }
     }
     
-    public static bool IsValidChar(char c, bool startOfWord)
+    public bool IsValidChar(char c, bool startOfWord)
     {
       if(c >= 'a' && c <= 'z')
         return true;
@@ -79,28 +68,30 @@ namespace WordCounter.Models
         return false;
     }
     
-    public static List<string> SplitWords(string text)
+    public void SplitWords()
     {
-      List<string> words = new List<string>();
       int wordStart = 0;
       int wordEnd = 0;
-      while (wordStart < text.Length)
+      while (wordStart < _text.Length)
       {
-        if (IsValidChar(text[wordStart], true))
+        if (IsValidChar(_text[wordStart], true))
         {
           wordEnd = wordStart + 1;
-          while (wordEnd < text.Length && IsValidChar(text[wordEnd], false))
+          while (wordEnd < _text.Length && IsValidChar(_text[wordEnd], false))
           {
             wordEnd++;
           }
           
-          words.Add(text.Substring(wordStart, wordEnd - wordStart));
+          string word = _text.Substring(wordStart, wordEnd - wordStart);
+          if(_wordCounts.ContainsKey(word))
+              _wordCounts[word]++;
+          else
+            _wordCounts.Add(word, 1);
+
           wordStart = wordEnd;
         }
         wordStart++;
       }
-      
-      return words;
     }
   }
 }
