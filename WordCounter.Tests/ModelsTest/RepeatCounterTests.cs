@@ -56,5 +56,30 @@ namespace WordCounter.Models.Tests
       Assert.AreEqual(2, counter.GetWordCounts()["string"]);
       Assert.AreEqual(1, counter.GetWordCounts()["this"]);
     }
+    
+    [TestMethod]
+    public void SortWords_ReturnAListSortedByCount()
+    {
+      RepeatCounter counter;
+      counter = new RepeatCounter("This, is a string...it is a Long, long string.");
+      
+      Assert.AreEqual("is", counter.GetSortedWords()[0]);
+      Assert.AreEqual("a", counter.GetSortedWords()[1]);
+      Assert.AreEqual("string", counter.GetSortedWords()[2]);
+      Assert.AreEqual("long", counter.GetSortedWords()[3]);
+    }
+    
+    [TestMethod]
+    public void GetCountForWord_ReturnAListSortedByCount()
+    {
+      RepeatCounter counter;
+      counter = new RepeatCounter("This, is a string...it is a Long, long string.");
+      
+      Assert.AreEqual(2, counter.GetCountForWord("string"));
+      Assert.AreEqual(1, counter.GetCountForWord("this"));
+      Assert.AreEqual(0, counter.GetCountForWord("cat"));
+    }
+    
+    
   }
 }

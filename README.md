@@ -47,13 +47,16 @@ Counts the number of times each word appears in a given string.
     - Example input: {"a"=2, "the"=3, "helloworld"=1}
     - Example output: ["the", "a", "helloworld"]
     
-- Use list and dictionary to display all words and their counts to the user ordered by count
-  - show a list of words listed in view
+- Allow users to either see couts for all words, or see the count for a specific word
+  - show a list of all words and their counts listed in view
     - Example input: {"a"=2, "the"=3, "helloworld"=1}, ["the", "a", "helloworld"]
     - Example output: 
       - 'the' was found 3 times.
       - 'a' was found 2 times.
       - 'helloworld' was found 1 time.
+  - a single word and its count
+    - Example input: {"a"=2, "the"=3, "helloworld"=1}, "the"
+    - Example output: 3
 
 
 ## Setup/Installation Requirements

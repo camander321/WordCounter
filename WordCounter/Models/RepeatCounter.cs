@@ -8,12 +8,14 @@ namespace WordCounter.Models
     private string _text;
     private bool _isValid = true;
     private Dictionary<string, int> _wordCounts = new Dictionary<string, int>();
+    private List<string> _sortedWords = new List<string>();
     
     public RepeatCounter(string text)
     {
       _text = text.ToLower();
       _isValid = _text.Length > 0;
       CountWords();
+      SortWords();
     }
     
     public string GetText()
@@ -31,6 +33,11 @@ namespace WordCounter.Models
       return _wordCounts;
     }
     
+    public List<string> GetSortedWords()
+    {
+      return _sortedWords;
+    }
+    
     public void CountWords()
     {
       List<string> words = SplitWords(_text);
@@ -40,6 +47,25 @@ namespace WordCounter.Models
           _wordCounts[word]++;
         else
           _wordCounts.Add(word, 1);
+      }
+    }
+    
+    public int GetCountForWord(string word)
+    {
+      if (!_wordCounts.ContainsKey(word))
+        return 0;
+      return _wordCounts[word];
+    }
+    
+    public void SortWords()
+    {
+      foreach(string word in _wordCounts.Keys)
+      {
+        int i = 0;
+        while (i < _sortedWords.Count && _wordCounts[word] <= _wordCounts[_sortedWords[i]])
+          i++;
+        
+        _sortedWords.Insert(i, word);
       }
     }
     
