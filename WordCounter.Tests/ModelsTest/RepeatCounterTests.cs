@@ -24,5 +24,26 @@ namespace WordCounter.Models.Tests
       counter = new RepeatCounter("some text");
       Assert.AreEqual(true, counter.GetIsValid());
     }
+    
+    [TestMethod]
+    public void IsValidChar_CheckIfCharPartOfWord()
+    {
+      Assert.AreEqual(true, RepeatCounter.IsValidChar('a', true));
+      Assert.AreEqual(false, RepeatCounter.IsValidChar('.', true));
+      Assert.AreEqual(false, RepeatCounter.IsValidChar('-', true));
+      Assert.AreEqual(true, RepeatCounter.IsValidChar('a', false));
+      Assert.AreEqual(false, RepeatCounter.IsValidChar('.', false));
+      Assert.AreEqual(true, RepeatCounter.IsValidChar('-', false));
+    }
+    
+    [TestMethod]
+    public void SplitWords_GetListOfWordsInString()
+    {
+      Assert.AreEqual("this", RepeatCounter.SplitWords("this isn't, a long-string!!!")[0]);
+      Assert.AreEqual("isn't", RepeatCounter.SplitWords("this isn't, a long-string!!!")[1]);
+      Assert.AreEqual("a", RepeatCounter.SplitWords("this isn't, a long-string!!!")[2]);
+      Assert.AreEqual("long-string", RepeatCounter.SplitWords("this isn't, a long-string!!!")[3]);
+      Assert.AreEqual(4, RepeatCounter.SplitWords("this isn't, a long-string!!!").Count);
+    }
   }
 }
