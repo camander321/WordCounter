@@ -4,7 +4,7 @@ using WordCounter.Models;
 namespace WordCounter.Models.Tests
 {
   [TestClass]
-  public class WordsTest
+  public class RepeatCounterTest
   {
     [TestMethod]
     public void Test_JustATest_True()

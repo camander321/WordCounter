@@ -2,7 +2,7 @@ using System;
 
 namespace WordCounter.Models
 {
-  public class Words
+  public class RepeatCounter
   {
     public static bool Test(bool b)
     {
