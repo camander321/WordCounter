@@ -8,6 +8,10 @@ body {
   font-family: 'Dosis', sans-serif;
 }
 
+h1 {
+  font-size: 5em;
+}
+
 .content {
   margin-top: 25px;
 }
@@ -16,4 +20,8 @@ body {
   background-color: #111111dd;
   color: lightblue;
   border-width: 0px;
+}
+
+button {
+  width: 30em;
 }
